@@ -1,23 +1,54 @@
-var words = ["frisbee", "football", "baseball", "soccer", "running", "skiing", "hockey", "swimming", "cycling"]
-var guessesRemaining = 15;
+var wordChoices = ["frisbee", "football", "baseball", "soccer", "running", "skiing", "hockey", "swimming", "cycling"]
+var chosenWord = wordChoices[Math.floor(Math.random() * wordChoices.length)];
+var chosenWordArray = [];
+var nameDiv = document.getElementsByClassName('current-word')[0];
+// var expectedDiv = document.getElementsByClassName('expected-name')[0];
+var guessesRemaining = 10;
 var gamesWon = 0;
+var lettersGuessed = [];
 
+//computer selects a word from array and word is displayed as _ _, with one _ representing one letter
+//   expectedDiv.innerHTML = '<div>' + chosenWord + '</div>';
+  
+//   for (var i = 0; i < chosenWord.length; i++) {
+//     var span = document.createElement('span');
+//     span.textContent = '_';
+//     span.style = 'margin-left: 5px;';
+//     nameDiv.appendChild(span);
+// }
 
-//computer selects a word from array
-var chosenWord = words[Math.floor(Math.random()*words.length)];
+//function to select and display word to guess
 console.log(chosenWord);
-
-//word is displayed as _ _, with one _ representing one letter
-function wordToSpaces() {
-    var wordLength = chosenWord.length;
-    document.getElementById("current-word").innerText = "<p>wordLength</p>";
-
+function wordToGuess () {
+    for (var i = 0; i < chosenWord.length; i++) {
+        chosenWordArray.push("_ ");
+        }
+    document.getElementById("current-word").innerHTML = chosenWordArray.join(" ");
 }
+wordToGuess();
 
-wordToSpaces();
-console.log(wordLength);
+//function to see if selected letter is in word
+
+//function for correct guess
+
+//function for incorrect guess
+
+//function for end of game - won
+
+//function for end of game - loss
+
+
 
 //user chooses a letter
+
+document.onkeyup = function(event) {
+    var keyPressed = event.key;
+    if (keyPressed === chosenWord.match(/a-z/g)) {
+        
+    }
+  };
+
+  
 
 //if letter is in the chosen word, 
     //letter replaces _ in appropriate location(s) in word (ie if second letter appears in 2nd space)
