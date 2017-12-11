@@ -1,23 +1,13 @@
 var wordChoices = ["frisbee", "football", "baseball", "soccer", "running", "skiing", "hockey", "swimming", "cycling"]
 var chosenWord = wordChoices[Math.floor(Math.random() * wordChoices.length)];
 var chosenWordArray = [];
-var nameDiv = document.getElementsByClassName('current-word')[0];
+// var nameDiv = document.getElementsByClassName('current-word')[0];
 // var expectedDiv = document.getElementsByClassName('expected-name')[0];
 var guessesRemaining = 10;
 var gamesWon = 0;
 var lettersGuessed = [];
 
-//computer selects a word from array and word is displayed as _ _, with one _ representing one letter
-//   expectedDiv.innerHTML = '<div>' + chosenWord + '</div>';
-  
-//   for (var i = 0; i < chosenWord.length; i++) {
-//     var span = document.createElement('span');
-//     span.textContent = '_';
-//     span.style = 'margin-left: 5px;';
-//     nameDiv.appendChild(span);
-// }
-
-//function to select and display word to guess
+//function to display word to guess
 console.log(chosenWord);
 function wordToGuess () {
     for (var i = 0; i < chosenWord.length; i++) {
@@ -27,32 +17,46 @@ function wordToGuess () {
 }
 wordToGuess();
 
-//function to see if selected letter is in word
+//Add keyup function separately?
+document.onkeyup = function (event) {
+    var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+    if ((userGuess).match(/[a-z]/)) {
+        console.log(chosenWordArray);
+        console.log(userGuess);
+        if (chosenWord.includes(userGuess)){
+            for (var j = 0; j < chosenWord.length; j++) {
+                if (userGuess === chosenWord[j]) {
+                    chosenWordArray[j]=userGuess;
+                    var answerDiv = document.getElementById("current-word");
+                    answerDiv.innerHTML = chosenWordArray.join("  ");
+                }
+            }
+        }
+       else {
+           if (guessesRemaining > 0){
+               guessesRemaining -=1;
+               console.log(guessesRemaining);
+               lettersGuessed.push(userGuess);
+               console.log(lettersGuessed);
+               document.getElementById("letters-guessed").innerHTML  = lettersGuessed.join(", ");
+               document.getElementById("guesses-remaining").innerHTML = guessesRemaining; 
+           }
+           else {
+            //game ends loss
+           }
+       }
+    }    
+}
 
-//function for correct guess
-
-//function for incorrect guess
 
 //function for end of game - won
+function endWin () {
+
+}
 
 //function for end of game - loss
+ 
 
-
-
-//user chooses a letter
-
-document.onkeyup = function(event) {
-    var keyPressed = event.key;
-    if (keyPressed === chosenWord.match(/a-z/g)) {
-        
-    }
-  };
-
-  
-
-//if letter is in the chosen word, 
-    //letter replaces _ in appropriate location(s) in word (ie if second letter appears in 2nd space)
-    //guess count is reduced by 1
 
 //if letter is not in the chosen word
     //letter appears in list of letters already guessed
@@ -70,4 +74,3 @@ document.onkeyup = function(event) {
     //user loses (play sound)
     //computer selects a new word
     //game starts over 
-
