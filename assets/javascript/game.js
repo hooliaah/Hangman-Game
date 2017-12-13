@@ -15,7 +15,7 @@ function pickANewWord() {
 }
 pickANewWord();
 
-//function to display word to guess, # guesses remaining, and # games won
+//function to display word to guess, # guesses remaining, # games won, empty array for letters guessed, and progress bar width
 function wordToGuess () {
     for (var i = 0; i < chosenWord.length; i++) {
         chosenWordArray.push("_ ");
@@ -23,6 +23,8 @@ function wordToGuess () {
     document.getElementById("current-word").innerHTML = chosenWordArray.join(" ");
     document.getElementById("guesses-remaining").innerHTML = guessesRemaining;
     document.getElementById("wins").innerHTML = gamesWon;
+    document.getElementById("letters-guessed").innerHTML  = lettersGuessed.join(", ");
+    progressBar();
 }
 wordToGuess();
 
@@ -59,9 +61,9 @@ document.onkeyup = function (event) {
 
 //function for end of game - win
 function endWin () {
-    alert("Yay! You completed a lap! Click the gray button to rehydrate and start a new lap!");
     gamesWon += 1;
     document.getElementById("wins").innerHTML = gamesWon;
+    alert("Yay! You completed a lap! Click the gray button to rehydrate and start a new lap!");
 }
 
 //function for end of game - loss
@@ -72,6 +74,7 @@ function endWin () {
  //function to reset the game when button is pressed
 function reset(){
     chosenWordArray = [];
+    chosenWord = "";
     guessesRemaining = 10;
     lettersGuessed = [];
     pickANewWord();
@@ -116,4 +119,3 @@ function reset(){
         }
           document.getElementById("progress-bar").style.width = progressWidth; 
           }
-

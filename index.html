@@ -21,20 +21,22 @@
     <div class="container">
     <div class="row">
         
-        <div class="card" style="width: 20rem;">
-            <div class="card-body mx-auto">
+        <div class="mx-auto card mb-5" style="width: 30rem;">
+            <div class="card-body">
                 <h4 class="card-title">Guess this word: </h4>
                 <p id="current-word" class="card-text"></p>
-                <p class="guesses">Letters already guessed: <span id="letters-guessed"></span></p>
-                <p class="guesses">Number of guesses remaining: <span id="guesses-remaining"></span></p>
+                <p class="card-text">Letters already guessed: </p>
+                <div id="letters-guessed" class="card-text answers"></div>
+                <p class="card-text">Number of guesses remaining: </p>
+                <div id="guesses-remaining" class="card-text answers"></div>
             </div>
             </div>
         
-        <div class="card" style="width: 20rem;">
+        <div class="mx-auto card mb-5" style="width: 30rem;">
             <img class="card-img-top" src="./assets/images/running.jpg" alt="runner image">
             <div class="card-body">
             <h4 class="card-title">Laps completed: </h4>
-            <p id="wins" class="card-text"></p>
+            <p id="wins" class="card-text answers"></p>
             <a href="#" onclick="reset()" class="btn btn-secondary">Click here to start a new lap</a>
             </div>
         </div>
