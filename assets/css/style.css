@@ -1,0 +1,11 @@
+body  {
+    background-image: url("../images/field.jpeg");
+}
+
+#current-word {
+    font-size: 1.4rem;
+}
+
+/* .card {
+    margin: 1rem;
+} */

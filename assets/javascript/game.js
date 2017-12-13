@@ -1,28 +1,33 @@
-var wordChoices = ["frisbee", "football", "baseball", "soccer", "running", "skiing", "hockey", "swimming", "cycling"]
-var chosenWord = wordChoices[Math.floor(Math.random() * wordChoices.length)];
+var wordChoices = ["frisbee", "football", "baseball", "soccer", "running", "skiing", "hockey", "swimming", "cycling", "tennis"]
+var chosenWord = "";
 var chosenWordArray = [];
-// var nameDiv = document.getElementsByClassName('current-word')[0];
-// var expectedDiv = document.getElementsByClassName('expected-name')[0];
+var chosenWordArrayToString = "";
 var guessesRemaining = 10;
 var gamesWon = 0;
 var lettersGuessed = [];
 
-//function to display word to guess
-console.log(chosenWord);
+
+//function to choose word to guess
+function pickANewWord() {
+    chosenWord = wordChoices[Math.floor(Math.random() * wordChoices.length)];
+}
+pickANewWord();
+
+//function to display word to guess, # guesses remaining, and # games won
 function wordToGuess () {
     for (var i = 0; i < chosenWord.length; i++) {
         chosenWordArray.push("_ ");
         }
     document.getElementById("current-word").innerHTML = chosenWordArray.join(" ");
+    document.getElementById("guesses-remaining").innerHTML = guessesRemaining;
+    document.getElementById("wins").innerHTML = gamesWon;
 }
 wordToGuess();
 
-//Add keyup function separately?
+//function for on key up event. Checks if letter pressed is correct or incorrect.
 document.onkeyup = function (event) {
     var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
     if ((userGuess).match(/[a-z]/)) {
-        console.log(chosenWordArray);
-        console.log(userGuess);
         if (chosenWord.includes(userGuess)){
             for (var j = 0; j < chosenWord.length; j++) {
                 if (userGuess === chosenWord[j]) {
@@ -31,46 +36,43 @@ document.onkeyup = function (event) {
                     answerDiv.innerHTML = chosenWordArray.join("  ");
                 }
             }
+            if (chosenWordArray.indexOf("_ ") < 0) {
+                endWin();
+            }
         }
        else {
-           if (guessesRemaining > 0){
-               guessesRemaining -=1;
-               console.log(guessesRemaining);
+           if (guessesRemaining > 1){
+               guessesRemaining -= 1;
                lettersGuessed.push(userGuess);
-               console.log(lettersGuessed);
                document.getElementById("letters-guessed").innerHTML  = lettersGuessed.join(", ");
                document.getElementById("guesses-remaining").innerHTML = guessesRemaining; 
            }
            else {
-            //game ends loss
+            endLoss();
            }
        }
     }    
 }
 
 
-//function for end of game - won
+//function for end of game - win
 function endWin () {
-
+    alert("Yay! You completed a lap! Click the gray button to rehydrate and start a new lap!"); //why does this not work?!?
+    gamesWon += 1;
+    document.getElementById("wins").innerHTML = gamesWon;
 }
 
 //function for end of game - loss
- 
+ function endLoss (){
+    alert("Oh no! You were too dehydrated to complete the lap. Click the gray button to rehydrate and start a new lap!");
+ }
 
-
-//if letter is not in the chosen word
-    //letter appears in list of letters already guessed
-    //guess count is reduced by 1
-
-//if user selects letter that was already used or guessed, nothing happens. 
-
-//if users guesses all letters in word before reaching end of # guesses
-    //user wins (play sound)
-    //win count increases by 1 
-    //new word selected by computer
-    //game starts over
-
-//if user does not guess all letters before reaching end of # guesses
-    //user loses (play sound)
-    //computer selects a new word
-    //game starts over 
+ //function to reset the game when button is pressed
+function reset(){
+    chosenWordArray = [];
+    guessesRemaining = 10;
+    lettersGuessed = [];
+    pickANewWord();
+    wordToGuess();
+    console.log(chosenWord);
+   };
